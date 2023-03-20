@@ -1,0 +1,72 @@
+[build-system]
+requires = ['poetry-core']
+build-backend = 'poetry.core.masonry.api'
+
+[tool.poetry]
+name = 'virtualenv-asdf'
+version = '0.1.0'
+description = 'A virtualenv Python discovery plugin using asdf'
+license = 'MIT'
+authors = ['Scott Sharkey <ssharkey@lanshark.com>']
+readme = 'README.md'
+homepage = 'https://github.com/lanshark/virtualenv-asdf'
+repository = 'https://github.com/lanshark/virtualenv-asdf'
+keywords = ['virtualenv', 'asdf']
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'Intended Audience :: Developers',
+    'Topic :: Software Development :: Libraries',
+    'Topic :: Software Development :: Testing',
+    'Topic :: Utilities',
+]
+packages = [{include = '_virtualenv_asdf', from = 'src'}]
+
+[tool.poetry.plugins.'virtualenv.discovery']
+asdf = '_virtualenv_asdf.discovery:ASDF'
+
+[tool.poetry.dependencies]
+python = '^3.7'
+virtualenv = '*'
+asdf-inspect = '~0.1'
+
+[tool.isort]
+lines_after_imports = 2
+multi_line_output = 5
+include_trailing_comma = true
+use_parentheses = true
+known_first_party = ['_virtualenv_asdf']
+known_third_party = ['virtualenv', 'asdf_inspect']
+
+[tool.pytest.ini_options]
+minversion = '7.0'
+testpaths = ['tests']
+
+[tool.tox]
+legacy_tox_ini = '''
+[tox]
+envlist =
+    py37
+    py38
+    py39
+    py310
+    py311
+    flake8
+    isort
+isolated_build = true
+
+[testenv]
+deps =
+    pytest
+    pytest-mock
+commands = pytest {posargs}
+
+[testenv:flake8]
+skip_install = true
+deps = flake8
+commands = flake8 {posargs}
+
+[testenv:isort]
+skip_install = true
+deps = isort
+commands = isort {posargs:. -c}
+'''
