@@ -1,9 +1,7 @@
-.*
-!.gitignore
-!.editorconfig
-!.flake8
-
 *.py[co]
 *.whl
 
 /dist/
+/.venv/
+/.tox/
+/.pytest_cache/

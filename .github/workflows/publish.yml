@@ -1,0 +1,61 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Test and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10.3.3
+
+      - name: Check tag matches package version
+        run: |
+          version="$(uv version --short)"
+          if [ "${GITHUB_REF_NAME}" != "v${version}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match package version ${version}"
+            exit 1
+          fi
+
+      - name: Lint
+        run: |
+          uv run --locked flake8
+          uv run --locked isort . -c
+
+      - name: Test (oldest and newest supported Python)
+        run: |
+          uv run --locked --python 3.11 pytest
+          uv run --locked --python 3.15 --isolated pytest
+
+      - name: Build
+        run: uv build
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    name: Publish
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/virtualenv-asdf/
+    permissions:
+      id-token: write  # required for PyPI trusted publishing
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist/
+
+      - uses: astral-sh/setup-uv@v10.3.3
+
+      - name: Publish
+        run: uv publish --trusted-publishing always
