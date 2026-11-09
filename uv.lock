@@ -4,11 +4,11 @@ requires-python = ">=3.11"
 
 [[package]]
 name = "asdf-inspect"
-version = "0.1.0"
+version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/b8/74/662e2307ebc804692b307f26697a2d29722f2a17e9b5ab795a260f0c22a6/asdf_inspect-0.1.0.tar.gz", hash = "sha256:16f76e75b620c7efab69dae583e080c18373ddd6ee1fe378128d8ac0180dad8d", size = 5237, upload-time = "2023-03-20T00:41:34.663Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/32/e9/8c707a5ffc38d7478b0dfa4f9b0596068b285fd67c317b1cfb279fa925d4/asdf_inspect-0.2.0.tar.gz", hash = "sha256:7ffaf0ab1f64056f22adb52bd71e630350971475ebf1271c26c519735dff15d0", size = 6145, upload-time = "2026-10-31T22:11:18.578Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/06/71/b5c221a1fd044a0882f72cebdc2fa3b7cf50deb1c0a66f464c6d9f8d0d46/asdf_inspect-0.1.0-py3-none-any.whl", hash = "sha256:972e872dc64a3a2b8a600a55f5440e3c6ed279ddcf455320ed9b87b10dfa7a22", size = 6224, upload-time = "2023-03-20T00:41:33.533Z" },
+    { url = "https://files.pythonhosted.org/packages/91/f5/0003d80920fe6c71c12178913d08aa2deb7e2157faa2714499d32425eae3/asdf_inspect-0.2.0-py3-none-any.whl", hash = "sha256:06aa3fd53e440f4c79499cb4aa90949941900c41191b104b8cbac3065e779e44", size = 7205, upload-time = "2026-10-31T22:11:17.472Z" },
 ]
 
 [[package]]
